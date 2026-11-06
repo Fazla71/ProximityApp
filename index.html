@@ -1,718 +1,424 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PROXIMITY STREAM • Official Portal</title>
-  <meta name="description" content="Download PROXIMITY STREAM for Android Phone, Android TV, and PC. Join our official Telegram community.">
-  
-  <!-- Google Fonts & FontAwesome Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <style>
-    :root {
-      --bg-dark: #040813;
-      --card-bg: rgba(16, 24, 42, 0.65);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover-border: rgba(91, 140, 255, 0.4);
-      --text: #f5f7fb;
-      --muted: #94a3b8;
-      --accent: #00e5ff;
-      --accent-gradient: linear-gradient(135deg, #00e5ff 0%, #7c4dff 50%, #f72585 100%);
-      --telegram-color: #0088cc;
-      --telegram-gradient: linear-gradient(135deg, #2aabee 0%, #229ed9 100%);
-      --glow-shadow: 0 0 35px rgba(0, 229, 255, 0.25);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* BACKGROUND ANIMATED GLOW ORBS */
-    .bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .glow-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.35;
-      animation: floatOrb 18s ease-in-out infinite alternate;
-    }
-
-    .orb-1 {
-      width: 450px;
-      height: 450px;
-      background: #7c4dff;
-      top: -100px;
-      left: -100px;
-    }
-
-    .orb-2 {
-      width: 550px;
-      height: 550px;
-      background: #00e5ff;
-      bottom: -150px;
-      right: -150px;
-      animation-delay: -9s;
-    }
-
-    .orb-3 {
-      width: 350px;
-      height: 350px;
-      background: #f72585;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation-delay: -4s;
-    }
-
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(60px, 40px) scale(1.1); }
-      100% { transform: translate(-40px, 80px) scale(0.95); }
-    }
-
-    /* CONTAINER & LAYOUT */
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* NAVBAR */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 24px;
-      background: rgba(13, 21, 35, 0.6);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      margin-bottom: 40px;
-      animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .brand i {
-      -webkit-text-fill-color: initial;
-      color: #00e5ff;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid rgba(0, 229, 255, 0.3);
-      background: rgba(0, 229, 255, 0.05);
-      padding: 6px 14px;
-      border-radius: 999px;
-      color: #00e5ff;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #00e5ff;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #00e5ff;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 229, 255, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
-    }
-
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 40px 12px 60px;
-      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
-      opacity: 0;
-    }
-
-    .logo-container {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 28px;
-    }
-
-    .logo-glow {
-      position: absolute;
-      inset: -5px;
-      background: var(--accent-gradient);
-      border-radius: 30px;
-      filter: blur(15px);
-      opacity: 0.7;
-      animation: logoGlow 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes logoGlow {
-      0% { opacity: 0.5; filter: blur(12px); }
-      100% { opacity: 0.9; filter: blur(20px); }
-    }
-
-    .logo {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 28px;
-      background: linear-gradient(135deg, #152238 0%, #0b1020 100%);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      display: grid;
-      place-items: center;
-      font-size: 44px;
-      font-weight: 900;
-      color: #ffffff;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-    }
-
-    .logo span {
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero h1 {
-      font-size: clamp(38px, 6vw, 68px);
-      font-weight: 900;
-      margin-bottom: 18px;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-    }
-
-    .hero h1 span {
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.7;
-      font-weight: 400;
-    }
-
-    /* BUTTONS */
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 36px;
-    }
-
-    .btn {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 16px 28px;
-      border-radius: 16px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 15px;
-      border: 1px solid var(--card-border);
-      color: white;
-      background: rgba(21, 31, 49, 0.7);
-      backdrop-filter: blur(10px);
-      min-width: 200px;
-      overflow: hidden;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn:hover {
-      transform: translateY(-4px) scale(1.02);
-      border-color: rgba(255, 255, 255, 0.25);
-      box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.5);
-    }
-
-    .btn.primary {
-      background: var(--accent-gradient);
-      border: none;
-      box-shadow: 0 10px 30px -5px rgba(0, 229, 255, 0.4);
-    }
-
-    .btn.primary:hover {
-      box-shadow: 0 15px 40px 0px rgba(0, 229, 255, 0.6);
-    }
-
-    /* TELEGRAM BUTTON */
-    .btn.telegram {
-      background: var(--telegram-gradient);
-      border: none;
-      box-shadow: 0 10px 30px -5px rgba(34, 158, 217, 0.4);
-    }
-
-    .btn.telegram:hover {
-      box-shadow: 0 15px 40px 0px rgba(42, 171, 238, 0.6);
-    }
-
-    /* SECTION COMMON */
-    .section {
-      margin: 50px 0;
-      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-      opacity: 0;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 28px;
-      letter-spacing: -0.5px;
-    }
-
-    /* DOWNLOAD CARDS */
-    .download-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .card {
-      position: relative;
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 32px 24px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      border-color: var(--card-hover-border);
-      box-shadow: var(--glow-shadow), 0 25px 60px rgba(0, 0, 0, 0.5);
-    }
-
-    .card-icon-wrapper {
-      width: 70px;
-      height: 70px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: grid;
-      place-items: center;
-      font-size: 30px;
-      color: #00e5ff;
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
-    }
-
-    .card:hover .card-icon-wrapper {
-      background: var(--accent-gradient);
-      color: #fff;
-      transform: scale(1.1) rotate(4deg);
-    }
-
-    .card h3 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 14px;
-      margin-bottom: 24px;
-      flex-grow: 1;
-    }
-
-    .download-button {
-      width: 100%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      text-decoration: none;
-      color: white;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 14px;
-      border-radius: 14px;
-      font-weight: 700;
-      font-size: 14px;
-      transition: all 0.3s ease;
-    }
-
-    .download-button:hover {
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    .download-button.primary {
-      background: var(--accent-gradient);
-      border: none;
-      box-shadow: 0 8px 20px -4px rgba(0, 229, 255, 0.4);
-    }
-
-    .download-button.primary:hover {
-      box-shadow: 0 12px 25px 0px rgba(0, 229, 255, 0.6);
-      transform: scale(1.02);
-    }
-
-    /* FEATURES */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .feature {
-      padding: 24px 18px;
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      text-align: center;
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .feature:hover {
-      transform: translateY(-5px);
-      border-color: rgba(0, 229, 255, 0.3);
-      background: rgba(16, 24, 42, 0.85);
-    }
-
-    .feature-icon {
-      font-size: 26px;
-      color: #00e5ff;
-      margin-bottom: 12px;
-    }
-
-    .feature strong {
-      display: block;
-      font-size: 16px;
-      margin-bottom: 6px;
-
-    }
-
-    .feature span {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    /* TELEGRAM BANNER SECTION */
-    .telegram-banner {
-      margin-top: 50px;
-      padding: 36px 28px;
-      border: 1px solid rgba(42, 171, 238, 0.3);
-      border-radius: 24px;
-      background: linear-gradient(135deg, rgba(16, 24, 42, 0.9) 0%, rgba(14, 40, 70, 0.6) 100%);
-      backdrop-filter: blur(15px);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .telegram-banner::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(34, 158, 217, 0.15) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .telegram-banner h2 {
-      font-size: 26px;
-      font-weight: 800;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .telegram-banner h2 i {
-      color: #2aabee;
-    }
-
-    .telegram-banner p {
-      color: var(--muted);
-      max-width: 600px;
-      margin: 0 auto 24px;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      color: var(--muted);
-      padding: 50px 0 30px;
-      font-size: 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: 50px;
-    }
-
-    footer a {
-      color: #00e5ff;
-      text-decoration: none;
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* RESPONSIVE DESIGN */
-    @media (max-width: 900px) {
-      .download-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 550px) {
-      .container {
-        padding: 16px;
-      }
-
-      .navbar {
-        padding: 12px 16px;
-      }
-
-      .brand {
-        font-size: 16px;
-      }
-
-      .hero h1 {
-        font-size: 36px;
-      }
-
-      .hero p {
-        font-size: 14px;
-      }
-
-      .features {
-        grid-template-columns: 1fr;
-      }
-
-      .btn {
-        width: 100%;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROXIMITY STREAM - High Quality Streaming App</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                            accent: '#00f0ff',
+                            purple: '#9d4edd'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { boxShadow: '0 0 15px rgba(99, 102, 241, 0.4)' },
+                            '100%': { boxShadow: '0 0 35px rgba(0, 240, 255, 0.7)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #090a0f;
+            color: #f3f4f6;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #00f0ff 0%, #6366f1 50%, #9d4edd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-border {
+            position: relative;
+            background: #11131e;
+            border-radius: 1rem;
+        }
+        .gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: 1rem;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.3), rgba(99, 102, 241, 0.1), rgba(157, 78, 221, 0.3));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .glow-effect {
+            box-shadow: 0 0 40px -10px rgba(99, 102, 241, 0.3);
+        }
+    </style>
 </head>
+<body class="antialiased min-h-screen flex flex-col justify-between overflow-x-hidden">
 
-<body>
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-opacity-80 bg-[#090a0f] border-b border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-brand-accent flex items-center justify-center text-white shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid font-bold fa-play text-xl"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-wider text-white">PROXIMITY<span class="gradient-text">STREAM</span></span>
+            </a>
 
-  <!-- BACKGROUND GLOW ANIMATIONS -->
-  <div class="bg-canvas">
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
-    <div class="glow-orb orb-3"></div>
-  </div>
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#features" class="hover:text-brand-accent transition-colors">Features</a>
+                <a href="#download" class="hover:text-brand-accent transition-colors">Download App</a>
+                <a href="#devices" class="hover:text-brand-accent transition-colors">Supported Platforms</a>
+                <a href="#pc-setup" class="hover:text-brand-accent transition-colors">PC Version Guide</a>
+            </nav>
 
-  <div class="container">
+            <!-- Download Quick Buttons -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk" class="px-4 py-2 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-white font-semibold text-xs sm:text-sm hover:opacity-90 shadow-lg shadow-brand-500/25 transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-android text-base"></i>
+                    <span>Android APK</span>
+                </a>
+                <a href="#pc-download" class="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-700 text-brand-accent font-semibold text-xs sm:text-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-desktop text-sm"></i>
+                    <span>PC Native</span>
+                </a>
+            </div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-      <div class="brand">
-        <i class="fa-solid fa-bolt"></i> PROXIMITY
-      </div>
-      <div class="status-badge">
-        <span class="status-dot"></span>
-        STREAM • OFFICIAL
-      </div>
-    </nav>
-
-    <!-- HERO -->
-    <section class="hero">
-      <div class="logo-container">
-        <div class="logo-glow"></div>
-        <div class="logo">
-          <span>P</span>
-        </div>
-      </div>
-
-      <h1>PROXIMITY <span>STREAM</span></h1>
-
-      <p>
-        Download PROXIMITY STREAM from one central location. 
-        Select your platform below to grab the official, fastest build.
-      </p>
-
-      <div class="buttons">
-        <a class="btn primary" href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk">
-          <i class="fa-solid fa-download"></i> Download Android APK
-        </a>
-        
-        <!-- TELEGRAM LINK BUTTON -->
-        <a class="btn telegram" href="https://t.me/live_sports_link_PROXIMITY" target="_blank" rel="noopener">
-          <i class="fa-brands fa-telegram"></i> Join Telegram
-        </a>
-      </div>
-    </section>
-
-    <!-- DOWNLOAD SECTION -->
-    <section class="section" id="downloads">
-      <h2 class="section-title">Choose Your Device</h2>
-
-      <div class="download-grid">
-
-        <!-- ANDROID PHONE -->
-        <article class="card">
-          <div class="card-icon-wrapper">
-            <i class="fa-solid fa-mobile-screen-button"></i>
-          </div>
-          <h3>Android Phone</h3>
-          <p>Download and install PROXIMITY STREAM on your Android smartphone.</p>
-          <a class="download-button primary" href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk">
-            <i class="fa-solid fa-arrow-down"></i> Download APK
-          </a>
-        </article>
-
-        <!-- ANDROID TV -->
-        <article class="card">
-          <div class="card-icon-wrapper">
-            <i class="fa-solid fa-tv"></i>
-          </div>
-          <h3>Android TV</h3>
-          <p>Optimized build for Android TV, Google TV, and TV streaming boxes.</p>
-          <a class="download-button primary" href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk">
-            <i class="fa-solid fa-arrow-down"></i> Download APK
-          </a>
-        </article>
-
-        <!-- PC -->
-        <article class="card">
-          <div class="card-icon-wrapper">
-            <i class="fa-solid fa-laptop"></i>
-          </div>
-          <h3>PC / Windows</h3>
-          <p>The native Windows application will be available here soon.</p>
-          <a class="download-button" href="#" onclick="showPCMessage(event);">
-            <i class="fa-solid fa-clock"></i> Coming Soon
-          </a>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section class="section">
-      <h2 class="section-title">Why PROXIMITY?</h2>
-
-      <div class="features">
-        <div class="feature">
-          <div class="feature-icon"><i class="fa-solid fa-bolt-fast"></i></div>
-          <strong>Ultra Fast</strong>
-          <span>High-speed streaming & quick downloads</span>
+            <!-- Mobile Menu Toggle Button -->
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </div>
 
-        <div class="feature">
-          <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-          <strong>Modern UI</strong>
-          <span>Clean, animated & user-friendly design</span>
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0e1017] border-b border-gray-800 px-4 py-4 space-y-3">
+            <a href="#features" class="block text-gray-300 hover:text-brand-accent py-2 transition-colors">Features</a>
+            <a href="#download" class="block text-gray-300 hover:text-brand-accent py-2 transition-colors">Download</a>
+            <a href="#devices" class="block text-gray-300 hover:text-brand-accent py-2 transition-colors">Supported Devices</a>
+            <a href="#pc-setup" class="block text-gray-300 hover:text-brand-accent py-2 transition-colors">PC Setup Guide</a>
+            <a href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk" class="w-full text-center py-3 rounded-xl bg-brand-600 text-white font-semibold flex items-center justify-center gap-2">
+                <i class="fa-brands fa-android text-lg"></i>
+                <span>Download APK v1.0</span>
+            </a>
         </div>
+    </header>
 
-        <div class="feature">
-          <div class="feature-icon"><i class="fa-solid fa-display"></i></div>
-          <strong>Multi Device</strong>
-          <span>Seamless setup across Android & Smart TV</span>
+    <main class="pt-24">
+        <!-- Hero Section -->
+        <section class="relative py-20 lg:py-32 overflow-hidden">
+            <!-- Background Glows -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-600/20 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute top-1/3 right-10 w-[300px] h-[300px] bg-brand-accent/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-accent text-xs sm:text-sm font-semibold mb-8">
+                    <span class="flex h-2 w-2 rounded-full bg-brand-accent animate-ping"></span>
+                    <span>Version 1.0 Live for Android Phone & TV</span>
+                </div>
+
+                <!-- Main Title -->
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black text-white tracking-tight mb-6 leading-tight">
+                    NEXT LEVEL STREAMING WITH <br class="hidden sm:inline" />
+                    <span class="gradient-text uppercase">Proximity Stream</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="max-w-2xl mx-auto text-gray-400 text-base sm:text-lg mb-10 leading-relaxed">
+                    Enjoy seamless high-quality entertainment on your <strong class="text-gray-200">Android Phone</strong>, <strong class="text-gray-200">Android TV</strong>, and <strong class="text-gray-200">PC</strong>. Fast, sleek, and optimized for smooth streaming.
+                </p>
+
+                <!-- Hero CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                    <!-- Direct APK Download Button -->
+                    <a href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk" 
+                       class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-600 via-brand-500 to-brand-accent text-white font-bold text-base shadow-xl shadow-brand-500/30 hover:scale-105 transition-all flex items-center justify-center gap-3 group">
+                        <i class="fa-brands fa-android text-2xl group-hover:rotate-12 transition-transform"></i>
+                        <div class="text-left">
+                            <div class="text-xs uppercase tracking-wider text-indigo-200">Android Mobile & TV</div>
+                            <div class="text-sm font-extrabold">Download APK v1.0</div>
+                        </div>
+                    </a>
+
+                    <!-- PC Native Download Button (Direct / Standalone) -->
+                    <a href="#pc-download" 
+                       class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gray-900/90 hover:bg-gray-800 border border-brand-accent/40 hover:border-brand-accent text-white font-bold text-base shadow-lg transition-all flex items-center justify-center gap-3 group">
+                        <i class="fa-solid fa-desktop text-2xl text-brand-accent group-hover:scale-110 transition-transform"></i>
+                        <div class="text-left">
+                            <div class="text-xs uppercase tracking-wider text-brand-accent">Windows / PC Native</div>
+                            <div class="text-sm font-extrabold">Download PC App</div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Quick Info Stats -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                    <div class="p-4 rounded-xl bg-gray-900/40 border border-gray-800/60 backdrop-blur-sm">
+                        <div class="text-2xl font-bold text-white mb-1">Android TV</div>
+                        <div class="text-xs text-gray-400">Remote Controlled</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-gray-900/40 border border-gray-800/60 backdrop-blur-sm">
+                        <div class="text-2xl font-bold text-white mb-1">Android Mobile</div>
+                        <div class="text-xs text-gray-400">Touch Friendly</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-gray-900/40 border border-gray-800/60 backdrop-blur-sm">
+                        <div class="text-2xl font-bold text-white mb-1">PC Native</div>
+                        <div class="text-xs text-gray-400">No Emulator Needed</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-gray-900/40 border border-gray-800/60 backdrop-blur-sm">
+                        <div class="text-2xl font-bold text-white mb-1">Ultra HD</div>
+                        <div class="text-xs text-gray-400">Smooth Streaming</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Devices Section -->
+        <section id="devices" class="py-16 bg-[#0c0d14] border-y border-gray-800/60 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Supported Platforms</h2>
+                    <p class="text-gray-400 max-w-xl mx-auto">Install Proximity Stream on your preferred device with dedicated native software.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Android Phone Card -->
+                    <div class="gradient-border p-8 flex flex-col items-center text-center hover:-translate-y-2 transition-transform duration-300">
+                        <div class="w-16 h-16 rounded-2xl bg-brand-500/10 text-brand-accent flex items-center justify-center text-3xl mb-6">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Android Phone</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">Optimized for smartphones with touch interface, fast searching, and quick playback.</p>
+                        <a href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk" class="w-full py-3 rounded-lg bg-brand-600/20 hover:bg-brand-600 border border-brand-500/40 text-brand-accent hover:text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Download Mobile APK
+                        </a>
+                    </div>
+
+                    <!-- Android TV Card -->
+                    <div class="gradient-border p-8 flex flex-col items-center text-center hover:-translate-y-2 transition-transform duration-300">
+                        <div class="w-16 h-16 rounded-2xl bg-brand-500/10 text-brand-accent flex items-center justify-center text-3xl mb-6">
+                            <i class="fa-solid fa-tv"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Android TV / Box</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">Designed specifically for TV screens with full D-Pad TV remote control support.</p>
+                        <a href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk" class="w-full py-3 rounded-lg bg-gradient-to-r from-brand-600 to-brand-500 text-white font-semibold text-sm transition-all shadow-md shadow-brand-500/20 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Download TV APK
+                        </a>
+                    </div>
+
+                    <!-- PC Native Version Card (No Emulator needed) -->
+                    <div class="gradient-border p-8 flex flex-col items-center text-center hover:-translate-y-2 transition-transform duration-300 relative border-brand-accent/40">
+                        <div class="absolute -top-3 px-3 py-1 bg-brand-accent text-black font-bold text-xs uppercase tracking-wider rounded-full">Native PC Version</div>
+                        <div class="w-16 h-16 rounded-2xl bg-brand-500/10 text-brand-accent flex items-center justify-center text-3xl mb-6">
+                            <i class="fa-solid fa-desktop"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">PC Native App</h3>
+                        <p class="text-gray-400 text-sm mb-6 flex-grow">Standalone PC Application. Runs directly on Windows PC/Laptop without needing any Android emulators!</p>
+                        <a href="#pc-download" class="w-full py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-brand-600 hover:opacity-90 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-download"></i> Download PC Native Setup
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">Why Choose Proximity Stream?</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Build with modern technology to ensure seamless streaming without interruptions.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="p-6 rounded-2xl bg-gray-900/30 border border-gray-800/80 hover:border-brand-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Ultra Fast Streaming</h4>
+                        <p class="text-gray-400 text-sm">Lightning fast load times with optimized servers for buffer-free video playback.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="p-6 rounded-2xl bg-gray-900/30 border border-gray-800/80 hover:border-brand-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Clean High-Tech UI</h4>
+                        <p class="text-gray-400 text-sm">Modern dark theme user interface designed for effortless navigation and viewing.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="p-6 rounded-2xl bg-gray-900/30 border border-gray-800/80 hover:border-brand-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Safe & Lightweight</h4>
+                        <p class="text-gray-400 text-sm">Lightweight APK size that doesn't drain your device battery or memory resources.</p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="p-6 rounded-2xl bg-gray-900/30 border border-gray-800/80 hover:border-brand-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-gamepad"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Remote Control Ready</h4>
+                        <p class="text-gray-400 text-sm">Fully compatible with standard Android TV remotes and wireless game controllers.</p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="p-6 rounded-2xl bg-gray-900/30 border border-gray-800/80 hover:border-brand-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-circle-play"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Auto Quality Switch</h4>
+                        <p class="text-gray-400 text-sm">Automatically adjusts stream quality based on your internet connectivity.</p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="p-6 rounded-2xl bg-gray-900/30 border border-gray-800/80 hover:border-brand-500/50 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
+                            <i class="fa-solid fa-cloud-arrow-down"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Direct GitHub Releases</h4>
+                        <p class="text-gray-400 text-sm">Fast and safe direct downloads straight from verified official GitHub releases.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PC Setup Guide Section -->
+        <section id="pc-setup" class="py-16 bg-[#0c0d14] border-t border-gray-800/60">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-extrabold text-white mb-3">PC Native Version Installation</h2>
+                    <p class="text-gray-400">Proximity Stream now comes with a dedicated PC app — No Android Emulator required!</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col sm:flex-row gap-4 p-6 rounded-xl bg-gray-900/60 border border-gray-800">
+                        <div class="w-10 h-10 rounded-full bg-brand-accent text-black font-extrabold flex items-center justify-center shrink-0">1</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Download the PC Version</h4>
+                            <p class="text-gray-400 text-sm mb-3">Click on the PC download button to get the executable installer / setup file directly.</p>
+                            <a href="#pc-download" class="inline-flex items-center gap-2 text-xs font-semibold text-brand-accent hover:underline">
+                                <i class="fa-solid fa-download"></i> Download PC Version (Executable)
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col sm:flex-row gap-4 p-6 rounded-xl bg-gray-900/60 border border-gray-800">
+                        <div class="w-10 h-10 rounded-full bg-brand-accent text-black font-extrabold flex items-center justify-center shrink-0">2</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Run Setup / Install</h4>
+                            <p class="text-gray-400 text-sm">Open the downloaded setup file on your Windows computer and follow the on-screen instructions to complete installation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col sm:flex-row gap-4 p-6 rounded-xl bg-gray-900/60 border border-gray-800">
+                        <div class="w-10 h-10 rounded-full bg-brand-accent text-black font-extrabold flex items-center justify-center shrink-0">3</div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white mb-1">Launch & Enjoy</h4>
+                            <p class="text-gray-400 text-sm">Open Proximity Stream directly from your desktop or start menu and start streaming in full screen quality.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Download Banner -->
+        <section id="download" class="py-20 relative overflow-hidden">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="p-10 sm:p-16 rounded-3xl bg-gradient-to-r from-brand-900/60 via-indigo-900/40 to-brand-900/60 border border-brand-500/30 backdrop-blur-md">
+                    <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Choose your platform</h2>
+                    <p class="text-gray-300 max-w-xl mx-auto mb-8 text-base sm:text-lg">Get Proximity Stream for Android or PC directly from GitHub Releases.</p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk" 
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-brand-accent to-brand-500 text-black font-extrabold text-base hover:scale-105 shadow-xl shadow-brand-accent/20 transition-all">
+                            <i class="fa-brands fa-android text-2xl"></i>
+                            <span>Download Android APK</span>
+                        </a>
+
+                        <a href="#pc-download" 
+                           class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-gray-800 hover:bg-gray-700 border border-gray-600 text-white font-extrabold text-base hover:scale-105 transition-all">
+                            <i class="fa-solid fa-desktop text-xl text-brand-accent"></i>
+                            <span>Download PC Standalone</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#06070a] border-t border-gray-800/60 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white text-sm font-bold">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <span class="text-lg font-bold text-white tracking-wide">PROXIMITY STREAM</span>
+            </div>
+
+            <p class="text-gray-500 text-xs sm:text-sm text-center">
+                &copy; <script>document.write(new Date().getFullYear())</script> Proximity Stream. Hosted on GitHub Pages.
+            </p>
+
+            <div class="flex items-center gap-4 text-gray-400">
+                <a href="https://github.com/Fazla71/ProximityApp" target="_blank" class="hover:text-white text-xl transition-colors" title="GitHub Repository">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
         </div>
-
-        <div class="feature">
-          <div class="feature-icon"><i class="fa-solid fa-sync"></i></div>
-          <strong>GitHub Releases</strong>
-          <span>Instant access to official software updates</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- TELEGRAM BANNER SECTION -->
-    <section class="telegram-banner">
-      <h2><i class="fa-brands fa-telegram"></i> Join Our Community</h2>
-      <p>
-        Get live sports stream updates, immediate release notifications, and support directly on our official Telegram channel.
-      </p>
-      <a class="btn telegram" href="https://t.me/live_sports_link_PROXIMITY" target="_blank" rel="noopener">
-        <i class="fa-brands fa-telegram"></i> Open @live_sports_link_PROXIMITY
-      </a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      © 2026 PROXIMITY STREAM. All rights reserved. <br>
-      Join us on <a href="https://t.me/live_sports_link_PROXIMITY" target="_blank" rel="noopener">Telegram</a> for live sports updates.
     </footer>
 
-  </div>
+    <!-- Mobile Menu Script -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-  <script>
-    function showPCMessage(e) {
-      e.preventDefault();
-      alert("The PC / Windows version is currently in development and will be released soon!");
-    }
-  </script>
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
 
+        // Close menu on clicking links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
