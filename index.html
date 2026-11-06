@@ -1,287 +1,718 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#050b18">
-<meta name="description" content="Download Proximity Stream for Android and Windows. Live TV, sports and playlist streaming.">
-<title>Proximity Stream — Live TV · Sports · Streaming</title>
-<style>
-:root{
-  --bg:#050b18;--panel:#0b172b;--panel2:#0d1d35;--line:#18365a;
-  --text:#f4f7ff;--muted:#a9bdd8;--purple:#8955ff;--blue:#1688ff;
-  --cyan:#00c9ed;--green:#00c98b;--pink:#d83fe8;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.55}
-a{color:inherit;text-decoration:none}
-.container{width:min(1180px,calc(100% - 42px));margin:auto}
-header{height:72px;border-bottom:1px solid rgba(85,145,210,.18);background:rgba(4,10,22,.94);position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}
-.nav{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:center;gap:12px;font-weight:850;letter-spacing:.4px;font-size:19px;line-height:1.05}
-.brand small{display:block;font-size:9px;letter-spacing:2.5px;color:#9bb8df;font-weight:600;margin-top:5px}
-.logo{width:39px;height:39px;display:grid;place-items:center;filter:drop-shadow(0 0 12px #764cff)}
-.logo svg{width:100%;height:100%}
-.navlinks{display:flex;align-items:center;gap:30px;color:#d4e2f7;font-size:13px}
-.navlinks a{transition:.2s}
-.navlinks a:hover{color:#b28cff}
-.navlinks a:first-child{color:#a77aff}
-.telegram{background:linear-gradient(110deg,#7854ff,#275ff4);padding:10px 18px;border-radius:24px;font-weight:700;font-size:12px;box-shadow:0 0 22px #4d45bd55}
-.menu{display:none;background:none;border:1px solid var(--line);color:white;border-radius:9px;padding:8px 11px;font-size:20px}
-.hero{position:relative;overflow:hidden;min-height:365px;border-bottom:1px solid rgba(67,137,210,.2);background:
- radial-gradient(ellipse at 77% 42%,#0c3b72 0%,transparent 38%),
- radial-gradient(ellipse at 95% 10%,#142b65 0%,transparent 35%),
- linear-gradient(110deg,#061023 0%,#07152b 55%,#061126 100%)}
-.hero:before{content:"";position:absolute;inset:0;background:
- linear-gradient(90deg,#061023 0%,rgba(6,16,35,.96) 34%,rgba(6,16,35,.25) 75%,#061023 100%),
- repeating-linear-gradient(125deg,transparent 0 70px,#3e83c00b 71px 73px)}
-.hero:after{content:"";position:absolute;width:480px;height:480px;border:1px solid #2586d52b;border-radius:50%;right:7%;top:-80px;box-shadow:0 0 0 35px #2586d50a,0 0 0 80px #2586d508}
-.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr .95fr;align-items:center;min-height:365px;padding:42px 0}
-.hero-copy{max-width:560px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;background:#2533a7aa;border:1px solid #596aff80;color:#fff;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.4px}
-h1{font-size:clamp(40px,5vw,58px);line-height:1.03;letter-spacing:-1.8px;margin:18px 0 16px;font-weight:850}
-.gradient{background:linear-gradient(90deg,#c04aff,#3d9dff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero-copy p{color:#c2d3ea;max-width:470px;font-size:16px;margin:0 0 23px}
-.hero-points{display:flex;gap:22px;flex-wrap:wrap;color:#d5e4f8;font-size:12px;margin-top:25px}
-.hero-points span:before{content:"✦";color:#8d72ff;margin-right:8px}
-.visual{height:285px;position:relative;display:flex;align-items:center;justify-content:center}
-.orb{position:absolute;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,#1765b455,transparent 68%);filter:blur(10px)}
-.screen{position:relative;width:min(440px,100%);height:235px;background:linear-gradient(145deg,#122746,#061020);border:1px solid #477ab5;border-radius:14px;padding:12px;transform:perspective(900px) rotateY(-8deg) rotateX(2deg);box-shadow:0 25px 55px #000a,0 0 35px #167be533}
-.screen-top{height:18px;display:flex;align-items:center;gap:5px;padding:0 5px;color:#8eb7e8;font-size:8px}
-.screen-top i{width:6px;height:6px;border-radius:50%;background:#6b83a4}
-.screen-body{display:grid;grid-template-columns:88px 1fr;gap:10px;height:185px}
-.screen-side{background:#071326;border-radius:7px;padding:10px 7px;color:#8da8ca;font-size:8px}
-.screen-side b{display:block;color:#b58bff;margin-bottom:12px;font-size:10px}
-.screen-side span{display:block;margin:10px 0}
-.preview{border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#063e75,#071426 70%);position:relative;padding:12px}
-.preview:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 60% 30%,#15b5e855,transparent 45%),linear-gradient(130deg,transparent 40%,#8b4cff55)}
-.live{position:relative;background:#ff3d58;border-radius:4px;padding:3px 7px;font-size:8px;font-weight:800;float:right}
-.pitch{position:absolute;left:12%;right:12%;top:24%;height:85px;border:1px solid #9bd5f5aa;border-radius:50%;transform:perspective(120px) rotateX(35deg);background:repeating-linear-gradient(90deg,#1b9b72aa 0 22px,#167c61aa 22px 44px)}
-.pitch:after{content:"";position:absolute;left:50%;height:100%;border-left:1px solid #c8f3e9}
-.play{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:38px;height:38px;border-radius:50%;background:#fff2;display:grid;place-items:center;border:1px solid #fff9}
-.preview-label{position:absolute;bottom:10px;left:12px;font-size:10px;font-weight:700}
-.phone{position:absolute;right:0;bottom:2px;width:95px;height:190px;border:3px solid #5678a5;border-radius:20px;background:linear-gradient(160deg,#09142b,#26105a);box-shadow:0 18px 35px #000b;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px}
-.phone:before{content:"";position:absolute;top:5px;width:30px;height:5px;background:#263d5e;border-radius:8px}
-.phone-logo{font-size:11px;font-weight:900;line-height:1.2}
-.phone-logo strong{display:block;color:#b47aff;font-size:21px;margin-bottom:8px}
-section{scroll-margin-top:85px}
-.download-section{padding:28px 0 12px}
-.section-heading{text-align:center;margin:0 0 20px}
-.section-heading h2{font-size:25px;margin:0 0 4px;letter-spacing:-.5px}
-.section-heading p{color:var(--muted);font-size:13px;margin:0}
-.heading-icon{color:#a18aff;font-size:27px;margin-right:9px}
-.download-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.download-card{border:1px solid #126c72;border-radius:14px;background:linear-gradient(120deg,#082329,#0b1b2e 75%);padding:22px;display:grid;grid-template-columns:125px 1fr;gap:18px;align-items:center;min-height:205px}
-.download-card.pc{border-color:#164c9b;background:linear-gradient(120deg,#0a1d3c,#0b1930 75%)}
-.device-art{height:145px;display:grid;place-items:center}
-.phone-art{width:76px;height:140px;border:3px solid #8ba4c8;border-radius:15px;background:linear-gradient(160deg,#15174d,#070d20);box-shadow:0 0 20px #774bff55;display:grid;place-items:center;text-align:center;font-size:9px;font-weight:800}
-.phone-art b{display:block;font-size:30px;color:#9e72ff}
-.laptop-art{width:130px;height:86px;border:4px solid #7393b8;border-radius:8px;background:radial-gradient(circle at center,#263b75,#09152b);display:grid;place-items:center;position:relative;box-shadow:0 0 20px #248dff33}
-.laptop-art:after{content:"";position:absolute;bottom:-10px;left:-12px;right:-12px;height:8px;background:#728eae;clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
-.device-art .android{font-size:40px;color:#35e67c}
-.device-art .windows{font-size:39px;color:#24a6ff}
-.download-info h3{font-size:20px;margin:0 0 2px}
-.download-info p{color:#b5c8e1;font-size:12px;margin:0 0 8px}
-.version{display:inline-block;border-radius:20px;padding:3px 10px;background:#064b3c;color:#62f0bb;font-size:10px;font-weight:700;margin:2px 0 7px}
-.pc .version{background:#123c91;color:#b9d5ff}
-.checks{list-style:none;padding:0;margin:3px 0 12px;color:#d1def0;font-size:11px}
-.checks li{margin:3px 0}
-.checks li:before{content:"✓";display:inline-grid;place-items:center;width:13px;height:13px;border-radius:50%;background:#078c71;color:#fff;font-size:9px;margin-right:7px}
-.pc .checks li:before{background:#078cc4}
-.download-btn{display:flex;justify-content:center;align-items:center;gap:9px;padding:11px 15px;border-radius:9px;background:linear-gradient(100deg,#00b987,#00a77b);color:white;font-size:12px;font-weight:800;transition:.2s}
-.pc .download-btn{background:linear-gradient(100deg,#1688ff,#2363f5)}
-.download-btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
-.features-section{padding:22px 0 26px}
-.features-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:13px}
-.feature{min-height:137px;text-align:center;padding:17px 10px;background:linear-gradient(145deg,#0c1a30,#071326);border:1px solid #174276;border-radius:11px}
-.feature .ico{font-size:25px;color:#9d66ff;margin-bottom:7px}
-.feature:nth-child(2) .ico,.feature:nth-child(5) .ico{color:#00bfe8}
-.feature:nth-child(4) .ico{color:#00db94}
-.feature h3{font-size:12px;margin:0 0 5px}
-.feature p{font-size:10px;color:#b2c4dc;margin:0}
-.updates-section{padding:0 0 22px}
-.update-box{border:1px solid #1b4b82;border-radius:12px;background:#09162a;padding:20px 25px;display:grid;grid-template-columns:1fr 1.25fr;gap:25px}
-.update-intro{border-right:1px solid #21446b;padding-right:20px}
-.update-intro h3{font-size:18px;margin:0 0 5px}
-.update-intro p{color:var(--muted);font-size:12px;margin:0 0 13px}
-.outline-btn{display:inline-block;border:1px solid #8b58ff;color:#bca1ff;border-radius:20px;padding:6px 13px;font-size:11px}
-.update-list{font-size:12px;color:#d3e0f2}
-.update-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:8px}
-.update-version{background:#3a2584;border-radius:20px;padding:4px 12px;font-size:10px;font-weight:800}
-.update-date{color:#8fa9cb;font-size:10px}
-.update-list ul{padding:0 0 0 20px;margin:0;list-style:none}
-.update-list li{margin:4px 0;position:relative}
-.update-list li:before{content:"";width:7px;height:7px;border-radius:50%;background:#a54cff;position:absolute;left:-17px;top:6px}
-.sponsor{margin:0 0 22px;padding:20px 25px;border:1px solid #8e32d9;border-radius:13px;background:linear-gradient(100deg,#9b229f,#5029bd 50%,#0d3d9c);display:flex;align-items:center;justify-content:space-between;gap:18px;overflow:hidden;position:relative}
-.sponsor:after{content:"↗";position:absolute;right:25%;font-size:110px;color:#ffffff12;top:-25px;font-weight:900}
-.sponsor-copy{position:relative;z-index:1}
-.sponsor small{font-size:9px;letter-spacing:1px;font-weight:800}
-.sponsor h3{font-size:18px;margin:3px 0}
-.sponsor p{font-size:12px;color:#eee2ff;margin:0}
-.sponsor-btn{position:relative;z-index:1;background:#424cff;border-radius:24px;padding:11px 20px;font-size:11px;font-weight:800;white-space:nowrap}
-footer{border-top:1px solid #163251;padding:22px 0 18px;color:#91a8c8;font-size:11px}
-.footer-top{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.footer-links{display:flex;gap:19px;flex-wrap:wrap}
-.footer-links a:hover{color:#b58aff}
-.copyright{border-top:1px solid #142b45;margin-top:16px;padding-top:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-@media(max-width:900px){
- .features-grid{grid-template-columns:repeat(3,1fr)}
- .download-card{grid-template-columns:95px 1fr;padding:17px}
- .phone-art{width:65px}.laptop-art{width:105px}
- .navlinks{gap:16px}
-}
-@media(max-width:650px){
- .container{width:min(100% - 28px,540px)}
- header{height:64px}
- .navlinks{display:none;position:absolute;top:63px;left:0;right:0;padding:17px 22px;background:#071225;border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:15px}
- .navlinks.open{display:flex}
- .menu{display:block}
- .telegram{display:none}
- .hero-inner{grid-template-columns:1fr;padding:42px 0 20px}
- .hero{min-height:0}
- .hero-copy p{font-size:14px}
- .visual{height:210px;margin-top:8px}
- .screen{width:90%;height:180px}
- .screen-body{height:132px;grid-template-columns:65px 1fr}
- .screen-side{font-size:7px;padding:7px 5px}
- .preview{padding:7px}
- .pitch{height:57px}
- .phone{width:70px;height:145px;right:-2px}
- .download-grid{grid-template-columns:1fr}
- .download-card{grid-template-columns:90px 1fr;min-height:190px}
- .features-grid{grid-template-columns:repeat(2,1fr);gap:10px}
- .feature{min-height:125px}
- .update-box{grid-template-columns:1fr;gap:14px;padding:18px}
- .update-intro{border-right:0;border-bottom:1px solid #21446b;padding:0 0 13px}
- .sponsor{align-items:flex-start;flex-direction:column;padding:18px}
- .sponsor-btn{align-self:flex-start}
- h1{font-size:43px}
-}
-@media(max-width:370px){
- .download-card{grid-template-columns:1fr;text-align:center}
- .device-art{height:100px}
- .phone-art{height:95px}
- .checks{text-align:left;display:inline-block}
- .download-btn{width:100%}
- .hero-points{gap:12px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PROXIMITY STREAM • Official Portal</title>
+  <meta name="description" content="Download PROXIMITY STREAM for Android Phone, Android TV, and PC. Join our official Telegram community.">
+  
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #040813;
+      --card-bg: rgba(16, 24, 42, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover-border: rgba(91, 140, 255, 0.4);
+      --text: #f5f7fb;
+      --muted: #94a3b8;
+      --accent: #00e5ff;
+      --accent-gradient: linear-gradient(135deg, #00e5ff 0%, #7c4dff 50%, #f72585 100%);
+      --telegram-color: #0088cc;
+      --telegram-gradient: linear-gradient(135deg, #2aabee 0%, #229ed9 100%);
+      --glow-shadow: 0 0 35px rgba(0, 229, 255, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* BACKGROUND ANIMATED GLOW ORBS */
+    .bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.35;
+      animation: floatOrb 18s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 450px;
+      height: 450px;
+      background: #7c4dff;
+      top: -100px;
+      left: -100px;
+    }
+
+    .orb-2 {
+      width: 550px;
+      height: 550px;
+      background: #00e5ff;
+      bottom: -150px;
+      right: -150px;
+      animation-delay: -9s;
+    }
+
+    .orb-3 {
+      width: 350px;
+      height: 350px;
+      background: #f72585;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: -4s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, 40px) scale(1.1); }
+      100% { transform: translate(-40px, 80px) scale(0.95); }
+    }
+
+    /* CONTAINER & LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 24px;
+      background: rgba(13, 21, 35, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      margin-bottom: 40px;
+      animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand i {
+      -webkit-text-fill-color: initial;
+      color: #00e5ff;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      background: rgba(0, 229, 255, 0.05);
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: #00e5ff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #00e5ff;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00e5ff;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(0, 229, 255, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 40px 12px 60px;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+      opacity: 0;
+    }
+
+    .logo-container {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 28px;
+    }
+
+    .logo-glow {
+      position: absolute;
+      inset: -5px;
+      background: var(--accent-gradient);
+      border-radius: 30px;
+      filter: blur(15px);
+      opacity: 0.7;
+      animation: logoGlow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes logoGlow {
+      0% { opacity: 0.5; filter: blur(12px); }
+      100% { opacity: 0.9; filter: blur(20px); }
+    }
+
+    .logo {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #152238 0%, #0b1020 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: grid;
+      place-items: center;
+      font-size: 44px;
+      font-weight: 900;
+      color: #ffffff;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .logo span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 900;
+      margin-bottom: 18px;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+    }
+
+    .hero h1 span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    /* BUTTONS */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      border: 1px solid var(--card-border);
+      color: white;
+      background: rgba(21, 31, 49, 0.7);
+      backdrop-filter: blur(10px);
+      min-width: 200px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.02);
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn.primary {
+      background: var(--accent-gradient);
+      border: none;
+      box-shadow: 0 10px 30px -5px rgba(0, 229, 255, 0.4);
+    }
+
+    .btn.primary:hover {
+      box-shadow: 0 15px 40px 0px rgba(0, 229, 255, 0.6);
+    }
+
+    /* TELEGRAM BUTTON */
+    .btn.telegram {
+      background: var(--telegram-gradient);
+      border: none;
+      box-shadow: 0 10px 30px -5px rgba(34, 158, 217, 0.4);
+    }
+
+    .btn.telegram:hover {
+      box-shadow: 0 15px 40px 0px rgba(42, 171, 238, 0.6);
+    }
+
+    /* SECTION COMMON */
+    .section {
+      margin: 50px 0;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      opacity: 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 28px;
+      letter-spacing: -0.5px;
+    }
+
+    /* DOWNLOAD CARDS */
+    .download-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      position: relative;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 32px 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: var(--card-hover-border);
+      box-shadow: var(--glow-shadow), 0 25px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-icon-wrapper {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      color: #00e5ff;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover .card-icon-wrapper {
+      background: var(--accent-gradient);
+      color: #fff;
+      transform: scale(1.1) rotate(4deg);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .download-button {
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      color: white;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .download-button:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .download-button.primary {
+      background: var(--accent-gradient);
+      border: none;
+      box-shadow: 0 8px 20px -4px rgba(0, 229, 255, 0.4);
+    }
+
+    .download-button.primary:hover {
+      box-shadow: 0 12px 25px 0px rgba(0, 229, 255, 0.6);
+      transform: scale(1.02);
+    }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .feature {
+      padding: 24px 18px;
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      text-align: center;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 229, 255, 0.3);
+      background: rgba(16, 24, 42, 0.85);
+    }
+
+    .feature-icon {
+      font-size: 26px;
+      color: #00e5ff;
+      margin-bottom: 12px;
+    }
+
+    .feature strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 6px;
+
+    }
+
+    .feature span {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* TELEGRAM BANNER SECTION */
+    .telegram-banner {
+      margin-top: 50px;
+      padding: 36px 28px;
+      border: 1px solid rgba(42, 171, 238, 0.3);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(16, 24, 42, 0.9) 0%, rgba(14, 40, 70, 0.6) 100%);
+      backdrop-filter: blur(15px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .telegram-banner::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(34, 158, 217, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .telegram-banner h2 {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .telegram-banner h2 i {
+      color: #2aabee;
+    }
+
+    .telegram-banner p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 50px 0 30px;
+      font-size: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 50px;
+    }
+
+    footer a {
+      color: #00e5ff;
+      text-decoration: none;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 900px) {
+      .download-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 550px) {
+      .container {
+        padding: 16px;
+      }
+
+      .navbar {
+        padding: 12px 16px;
+      }
+
+      .brand {
+        font-size: 16px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 14px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
- <div class="container nav">
-  <a class="brand" href="#home" aria-label="Proximity Stream home">
-   <span class="logo"><svg viewBox="0 0 48 48" fill="none"><path d="M8 7.5c0-2.8 3-4.5 5.4-3.1l29 16.7c2.4 1.4 2.4 4.8 0 6.2l-29 16.7C11 45.4 8 43.7 8 40.9V7.5Z" fill="url(#g)"/><path d="M17 15.5 32.5 24 17 32.5V15.5Z" fill="#081326"/><defs><linearGradient id="g" x1="8" y1="5" x2="44" y2="43"><stop stop-color="#B45BFF"/><stop offset="1" stop-color="#167DFF"/></linearGradient></defs></svg></span>
-   <span>PROXIMITY STREAM<small>LIVE TV · SPORTS · STREAMING</small></span>
-  </a>
-  <nav class="navlinks" id="navlinks">
-   <a href="#home">⌂ &nbsp;Home</a><a href="#download">⇩ &nbsp;Download</a><a href="#features">★ &nbsp;Features</a><a href="#updates">◴ &nbsp;Updates</a><a href="#support">➤ &nbsp;Telegram</a>
-  </nav>
-  <a class="telegram" href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener">➤ &nbsp;Join Telegram</a>
-  <button class="menu" id="menu" aria-label="Open menu">☰</button>
- </div>
-</header>
 
-<main>
-<section class="hero" id="home">
- <div class="container hero-inner">
-  <div class="hero-copy">
-   <span class="eyebrow">✦ &nbsp; FREE STREAMING APPLICATION</span>
-   <h1>Stream Without<br><span class="gradient">Limits.</span></h1>
-   <p>Enjoy live sports, streaming channels and your favourite playlists with Proximity Stream. Available for Android and Windows PC.</p>
-   <div class="hero-points"><span>Live TV</span><span>Live Sports</span><span>Playlist Support</span><span>HD Quality</span></div>
+  <!-- BACKGROUND GLOW ANIMATIONS -->
+  <div class="bg-canvas">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
   </div>
-  <div class="visual" aria-label="Illustration of Proximity Stream on desktop and phone">
-   <div class="orb"></div>
-   <div class="screen">
-    <div class="screen-top"><i></i><i></i><i></i><span style="margin-left:8px">PROXIMITY STREAM PLAYER</span></div>
-    <div class="screen-body">
-     <div class="screen-side"><b>▶ PROXIMITY</b><span>⌂ &nbsp;Home</span><span>▣ &nbsp;Live TV</span><span>⚽ &nbsp;Sports</span><span>♫ &nbsp;Playlist</span><span>⚙ &nbsp;Settings</span></div>
-     <div class="preview"><span class="live">LIVE</span><div class="pitch"></div><div class="play">▶</div><div class="preview-label">Live Sports · Featured</div></div>
-    </div>
-   </div>
-   <div class="phone"><div class="phone-logo"><strong>▶</strong>PROXIMITY<br><span class="gradient">STREAM</span></div></div>
-  </div>
- </div>
-</section>
 
-<section class="download-section" id="download">
- <div class="container">
-  <div class="section-heading"><h2><span class="heading-icon">⇩</span>Download <span class="gradient">Proximity Stream</span></h2><p>Choose your platform and start streaming today!</p></div>
-  <div class="download-grid">
-   <article class="download-card">
-    <div class="device-art"><div class="phone-art"><div><b>▶</b>PROXIMITY<br>STREAM</div></div></div>
-    <div class="download-info">
-     <div style="font-size:25px;color:#35e67c">♟</div>
-     <h3>Android Version</h3><p>For Android smartphones and tablets.</p>
-     <span class="version">Latest Version: 1.0.0</span>
-     <ul class="checks"><li>Live TV &amp; Sports</li><li>M3U8 / MPD Support</li><li>Smooth Playback</li></ul>
-     <a class="download-btn" href="YOUR_ANDROID_APK_LINK" target="_blank" rel="noopener">♟ &nbsp; Download APK &nbsp; ↓</a>
-    </div>
-   </article>
-   <article class="download-card pc">
-    <div class="device-art"><div class="laptop-art"><span style="font-size:36px;color:#22a7ff">⊞</span></div></div>
-    <div class="download-info">
-     <div style="font-size:25px;color:#24a6ff">⊞</div>
-     <h3>Windows PC Version</h3><p>For Windows desktop and laptop computers.</p>
-     <span class="version">Latest Version: 1.0.0</span>
-     <ul class="checks"><li>Live TV &amp; Sports</li><li>Playlist Support</li><li>Modern UI</li></ul>
-     <a class="download-btn" href="YOUR_WINDOWS_EXE_LINK" target="_blank" rel="noopener">⊞ &nbsp; Download EXE &nbsp; ↓</a>
-    </div>
-   </article>
-  </div>
- </div>
-</section>
+  <div class="container">
 
-<section class="features-section" id="features">
- <div class="container">
-  <div class="section-heading"><h2>★ &nbsp;Key Features</h2><p>Everything you need for the best streaming experience.</p></div>
-  <div class="features-grid">
-   <article class="feature"><div class="ico">⚽</div><h3>Live Sports</h3><p>Watch your favourite sports events live.</p></article>
-   <article class="feature"><div class="ico">▣</div><h3>Live TV</h3><p>Thousands of channels at your fingertips.</p></article>
-   <article class="feature"><div class="ico">▷</div><h3>Playlist Player</h3><p>Support for M3U8 and MPD playlists.</p></article>
-   <article class="feature"><div class="ico">ϟ</div><h3>Fast &amp; Smooth</h3><p>Buffer-free streaming experience.</p></article>
-   <article class="feature"><div class="ico">▱</div><h3>Desktop Support</h3><p>Optimized for Windows PC.</p></article>
-   <article class="feature"><div class="ico">▯</div><h3>Mobile Support</h3><p>Enjoy on your Android device.</p></article>
-  </div>
- </div>
-</section>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="brand">
+        <i class="fa-solid fa-bolt"></i> PROXIMITY
+      </div>
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        STREAM • OFFICIAL
+      </div>
+    </nav>
 
-<section class="updates-section" id="updates">
- <div class="container">
-  <div class="update-box">
-   <div class="update-intro"><h3>⟳ &nbsp;Latest Update Log</h3><p>Here are the latest changes and improvements.</p><a class="outline-btn" href="YOUR_UPDATE_LOG_LINK">View All Updates →</a></div>
-   <div class="update-list">
-    <div class="update-head"><span class="update-version">Version 1.0.0</span><span class="update-date">Release date: YOUR_RELEASE_DATE</span></div>
-    <ul><li>Initial Release</li><li>Android and Windows Support</li><li>Improved Streaming Player</li><li>Playlist (M3U8 / MPD) Support</li><li>Bug Fixes and Performance Improvements</li></ul>
-   </div>
-  </div>
- </div>
-</section>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="logo-container">
+        <div class="logo-glow"></div>
+        <div class="logo">
+          <span>P</span>
+        </div>
+      </div>
 
-<section class="container" id="support">
- <div class="sponsor">
-  <div class="sponsor-copy"><small>ADVERTISEMENT / SPONSOR</small><h3>Advertise With Proximity Stream</h3><p>Reach streaming users and grow your brand with us.</p></div>
-  <a class="sponsor-btn" href="YOUR_TELEGRAM_LINK" target="_blank" rel="noopener">➤ &nbsp; Contact for Sponsorship</a>
- </div>
-</section>
-</main>
+      <h1>PROXIMITY <span>STREAM</span></h1>
 
-<footer>
- <div class="container">
-  <div class="footer-top">
-   <a class="brand" href="#home"><span class="logo"><svg viewBox="0 0 48 48" fill="none"><path d="M8 7.5c0-2.8 3-4.5 5.4-3.1l29 16.7c2.4 1.4 2.4 4.8 0 6.2l-29 16.7C11 45.4 8 43.7 8 40.9V7.5Z" fill="url(#f)"/><defs><linearGradient id="f" x1="8" y1="5" x2="44" y2="43"><stop stop-color="#B45BFF"/><stop offset="1" stop-color="#167DFF"/></linearGradient></defs></svg></span><span>PROXIMITY STREAM<small>LIVE TV · SPORTS · STREAMING</small></span></a>
-   <div class="footer-links"><a href="#home">Home</a><a href="#download">Download</a><a href="#features">Features</a><a href="#updates">Updates</a><a href="YOUR_TELEGRAM_LINK">Telegram</a></div>
+      <p>
+        Download PROXIMITY STREAM from one central location. 
+        Select your platform below to grab the official, fastest build.
+      </p>
+
+      <div class="buttons">
+        <a class="btn primary" href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk">
+          <i class="fa-solid fa-download"></i> Download Android APK
+        </a>
+        
+        <!-- TELEGRAM LINK BUTTON -->
+        <a class="btn telegram" href="https://t.me/live_sports_link_PROXIMITY" target="_blank" rel="noopener">
+          <i class="fa-brands fa-telegram"></i> Join Telegram
+        </a>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD SECTION -->
+    <section class="section" id="downloads">
+      <h2 class="section-title">Choose Your Device</h2>
+
+      <div class="download-grid">
+
+        <!-- ANDROID PHONE -->
+        <article class="card">
+          <div class="card-icon-wrapper">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <h3>Android Phone</h3>
+          <p>Download and install PROXIMITY STREAM on your Android smartphone.</p>
+          <a class="download-button primary" href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk">
+            <i class="fa-solid fa-arrow-down"></i> Download APK
+          </a>
+        </article>
+
+        <!-- ANDROID TV -->
+        <article class="card">
+          <div class="card-icon-wrapper">
+            <i class="fa-solid fa-tv"></i>
+          </div>
+          <h3>Android TV</h3>
+          <p>Optimized build for Android TV, Google TV, and TV streaming boxes.</p>
+          <a class="download-button primary" href="https://github.com/Fazla71/ProximityApp/releases/download/f/Proximity.Stream.BD-1.0.apk">
+            <i class="fa-solid fa-arrow-down"></i> Download APK
+          </a>
+        </article>
+
+        <!-- PC -->
+        <article class="card">
+          <div class="card-icon-wrapper">
+            <i class="fa-solid fa-laptop"></i>
+          </div>
+          <h3>PC / Windows</h3>
+          <p>The native Windows application will be available here soon.</p>
+          <a class="download-button" href="#" onclick="showPCMessage(event);">
+            <i class="fa-solid fa-clock"></i> Coming Soon
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section">
+      <h2 class="section-title">Why PROXIMITY?</h2>
+
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon"><i class="fa-solid fa-bolt-fast"></i></div>
+          <strong>Ultra Fast</strong>
+          <span>High-speed streaming & quick downloads</span>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+          <strong>Modern UI</strong>
+          <span>Clean, animated & user-friendly design</span>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon"><i class="fa-solid fa-display"></i></div>
+          <strong>Multi Device</strong>
+          <span>Seamless setup across Android & Smart TV</span>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon"><i class="fa-solid fa-sync"></i></div>
+          <strong>GitHub Releases</strong>
+          <span>Instant access to official software updates</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TELEGRAM BANNER SECTION -->
+    <section class="telegram-banner">
+      <h2><i class="fa-brands fa-telegram"></i> Join Our Community</h2>
+      <p>
+        Get live sports stream updates, immediate release notifications, and support directly on our official Telegram channel.
+      </p>
+      <a class="btn telegram" href="https://t.me/live_sports_link_PROXIMITY" target="_blank" rel="noopener">
+        <i class="fa-brands fa-telegram"></i> Open @live_sports_link_PROXIMITY
+      </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      © 2026 PROXIMITY STREAM. All rights reserved. <br>
+      Join us on <a href="https://t.me/live_sports_link_PROXIMITY" target="_blank" rel="noopener">Telegram</a> for live sports updates.
+    </footer>
+
   </div>
-  <div class="copyright"><span>© 2026 Proximity Stream. All Rights Reserved.</span><span>Made for Streaming Enthusiasts ♥</span></div>
- </div>
-</footer>
-<script>
-const menu=document.getElementById('menu');
-const nav=document.getElementById('navlinks');
-menu.addEventListener('click',()=>nav.classList.toggle('open'));
-nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
-</script>
+
+  <script>
+    function showPCMessage(e) {
+      e.preventDefault();
+      alert("The PC / Windows version is currently in development and will be released soon!");
+    }
+  </script>
+
 </body>
 </html>
